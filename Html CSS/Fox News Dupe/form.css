@@ -1,0 +1,25 @@
+.pre-content, .page-content, .post-content {
+    width: 100%;
+}
+
+.page-foxid .main-content {
+    padding: 0;
+    
+}
+.main-content {
+    margin: 0 16px;
+}
+article, aside, details, figcaption, figure, footer, header, main, hgroup, menu, nav, section {
+    display: block;
+}
+
+div{
+    display: block;
+}
+
+.page-content:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
