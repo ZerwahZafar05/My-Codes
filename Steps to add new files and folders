@@ -2,7 +2,10 @@ Open cmd in that main folder "My-codes"
 If it's a brand new folder / App then write command = git init
 Then enter= git add . ( For uplaoding all the files and folder in there as it is on GitHub )
 Check Status = git status
-Now = git commit -m " My Initial Commit ( Anything )"
+Now = git commit -m " My Initial Commit ( A msg )"
 Command = git log (will show the previous commits) OR git log --oneline
-Now, everytime you make changes to the code, just write command = git add . and then check status by = git status to see that files have been modified
+Now, everytime you make changes to the code,
+Step 1: just write command = git add . 
+Step 2: git commit -m " Abc componnet Added ( A msg )"
+Step 3: check status by = git status to see that files have been modified
 Wallah, You are done!!!
