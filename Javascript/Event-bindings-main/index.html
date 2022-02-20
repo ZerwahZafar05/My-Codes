@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>
+		Lab Task 01.com
+	</title>
+    <link rel="stylesheet" href="./Styling file.css">
+    
+</head>
+<body>
+    <h1>Zerwah Zafar </h1>
+    <p> <h2 style="color: royalblue">SP18-BCS-185 </h2> </p>
+   <p> <h2 style="color:royalblue">Lab Task 01 </h2> </p>
+    <div id="container">
+        <div id="left">
+    <table id="table">  
+        <h1>List Of Persons</h1>
+        
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Action</th>
+                </tr>
+                <tr>
+                    <td scope="col">Alizay</td>
+                    <td scope="col">Female</td>
+                    <td scope="col">21</td>
+                    <td scope="col">Lahore</td>
+                    <td scope="col"><button onclick="selectRow()">Update</button>/
+                        <button onclick="remove()">Delete</button></td>
+                </tr>
+            </thead>
+            <tbody>
+                
+                
+            </tbody>
+        </table>    
+    </div>
+    <div id="right">
+<form>
+    <h2>Add/Update Person Form </h2>
+    <table id="tab2" >
+        <tr>
+            <td><label for="name">Name: </label> 
+            <input id="name" type="text" name="name"></td>
+        </tr>
+        <tr>
+            <td>Gender: 
+            <label for="male">Male</label> 
+            <input id="male" type="radio" name="gender" value="male">
+            <label for="female">Female</label>
+            <input  id="female" type="radio" name="gender" value="female">
+            
+        </td>
+        </tr>
+        <tr>
+            <td><label for="age">Age: </label> <input id="age" type="text" name="age"></td>
+        </tr>
+        <tr>
+            <td>
+
+                <label for="City">City:</label>
+
+                <select name="city" id="newcity">
+                  <option value="Lahore">Lahore</option>
+                  <option value="Karachi">Karachi</option>
+                  <option value="Islamabad">Islamabad</option>
+                  <option value="Multan">Multan</option>
+                </select>
+                </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="reset" value="reset">
+                <input type="submit" value="add" onclick="add()" name="add">
+                <input type="submit" value="update" onclick="update()" name="update"> 
+        </td>
+    </tr>
+    </table>
+
+</form>
+</div>
+</div>
+<script src="./scripts.js"></script>
+</body>
+</html>

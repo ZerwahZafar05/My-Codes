@@ -1,0 +1,126 @@
+{% extends 'dashboard/base.html' %}
+{% load widget_tweaks %}
+
+{% block dashboard_title %}
+Edit Book
+{% endblock %}
+
+
+<!-- navbar address -->
+{% block navbar_address %}
+<li class="breadcrumb-item active">Edit Book</li>
+{% endblock %}
+
+<!-- Main Content -->
+{% block content %}
+<!-- form start -->
+<div class="content">
+    <div class="container-fluid">
+        <form enctype="multipart/form-data" method="post" action="{% url 'admin-edit-book' book_id %}">
+            {% csrf_token %}
+             <div class="card-body">
+                <div class="form-group">
+                    <label>Book Title</label>
+                    {% render_field form.title|add_class:'input input__text' type="text" placeholder="Book Title" class+="form-control" %}
+                </div>
+                <div class="form-group">
+                    <label >Year of Publish</label>
+                    {% render_field form.year_of_publish|add_class:'input' type="date" placeholder="Year of publish" class+="form-control" %}
+                </div>
+
+                <div class="form-group">
+                    <label >Number of pages</label>
+                    {% render_field form.no_of_pages|add_class:'input' type="number" placeholder="Number of pages" class+="form-control" %}
+                </div>
+
+                <div class="form-group">
+                    <label >Genre of the Book</label>
+                    {% render_field form.genre|add_class:'input' type="option" placeholder="Year of publish" class+="form-control" %}
+
+                </div>
+
+
+                <div class="form-group">
+                    <label >Price of the Book</label>
+                     {% render_field form.price|add_class:'input' type="number" placeholder="Price of the book" class+="form-control" %}
+
+                </div>
+
+
+                <div class="form-group">
+                    <label >Author of the book</label>
+                    {% render_field form.author|add_class:'input' type="text" placeholder="Author of the book" class+="form-control" %}
+
+                </div>
+
+                    <div class="form-group">
+                        <label style="margin-right:2%">Adult Mode?</label>
+                        {% render_field form.adult_mode|add_class:'input' type="checkbox" placeholder="Cover Photo" %}
+                    </div>
+
+
+                <div class="form-group">
+                    <label style="margin-right:2%">Summary</label>
+                    {% render_field form.summary|add_class:'input col-12' type="text" placeholder="Cover Photo" %}
+                </div>
+                <div class="form-group">
+                    <label >Cover Photo</label>
+                    {% render_field form.cover_photo|add_class:'file' accept='image/*' type="file" placeholder="Cover Photo" %}
+
+                </div>
+
+
+                <div class="form-group">
+                    <label >Book Status</label>
+                    {% render_field form.book_type|add_class:'input' type="text" placeholder="book_status" class+="form-control" %}
+                </div>
+                <div class="form-group form-pdf">
+                    <label >PDF</label>
+                    {% render_field form.pdf|add_class:'input' type="file" placeholder="file" %}
+                </div>
+
+                <div class="form-group form-audio">
+                    <label >Audio</label>
+                    {% render_field form.audio|add_class:'input' type="file" placeholder="file" %}
+                </div>
+
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+<script>
+$(document).ready(function(){
+    $('#id_book_type').change(function(){
+        if ($(this).val() == 'PDF'){
+            $('.form-audio').hide();
+            $('.form-pdf').show();
+
+            $("#id_pdf").prop('required',true);
+            $("#id_audio").prop('required',false);
+        }
+        if ($(this).val() == 'AUDIO'){
+            $('.form-pdf').hide();
+            $('.form-audio').show();
+
+            $("#id_pdf").prop('required',false);
+            $("#id_audio").prop('required',true);
+        }
+        if ($(this).val() == 'BOTH'){
+            $('.form-pdf').show();
+            $('.form-audio').show();
+
+            $("#id_audio").prop('required',true);
+            $("#id_pdf").prop('required',true);
+        }
+    });
+});
+</script>
+
+{% endblock %}

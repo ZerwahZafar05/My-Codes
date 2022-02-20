@@ -1,0 +1,218 @@
+{% extends 'user_dashboard/base.html' %}
+{% load static %}
+{% load filters_user %}
+{% block navbar_address %}
+<li class="breadcrumb-item active">Cart</li>
+
+
+{% endblock navbar_address %}
+{% block content %}
+<main class="cart-page-main-block inner-page-sec-padding-bottom">
+    <div class="cart_area cart-area-padding  ">
+        <div class="container">
+            <div class="page-section-title">
+                <h4 class="login-title login-headings">YOUR BAG</h4>
+
+            </div>
+            <div class="row">
+                <form action="#" style="width: 70%">
+                    <!-- Cart Table -->
+                    <div class="row">
+                        <div style=" padding-top: 10px; padding-bottom: 10px;padding-left: 10px;width:90%">
+                            {% for book in books %}
+                            <div class="row"
+                                 style="border-bottom: 0.5px solid black; padding-top: 10px; padding-bottom: 10px ;">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+                                    <div class="pro-thumbnail" style="width: 90px;"><a href="#"><img
+                                            src="{{book.cover_photo.url}}"
+                                            alt="Product"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-7 col-sm-8 col-xs-8">
+                                    <a href="#">{{book.title}}</a>
+                                    <p>{{book.author}}</p>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6"><a href="#" onclick="remove_cart({{book.book_id}})"><i class="far fa-trash-alt"></i>
+                                            Remove from cart</a></div>
+                                            {% if book.wishlist_book%}
+                                            <div class="col-lg-6 col-md-6"><a href="#" onclick="remove_to_wishlist({{book.book_id}}); return false;"><i class="fas fa-heart"
+                                                                                          style="color: red;"></i> Add to
+                                                wishlist</a></div>
+
+                                            {% else %}
+                                                <div class="col-lg-6 col-md-6"><a href="#" onclick="add_to_wishlist({{book.book_id}}); return false;"><i class="far fa-heart"
+                                                                                          style="color: red;"></i> Add to
+                                                wishlist</a></div>
+                                            {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-1 col-xs-12">
+                                    {% if book.percentage %}
+                                    <del class="price-old">Rs. {{book.price}}</del>
+                                    <span>Rs. {{ book.price|calculate_price:book.percentage}}</span>
+                                    {% else %}
+                                    <span>Rs. {{book.price}}</span>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <div class="row">
+                        <div>
+                            <div class="cart-summary">
+                                <div class="cart-summary-wrap">
+                                    <h4><span>Cart Summary</span></h4>
+                                    <p>Sub Total <span class="text-primary"><strong>Rs.</strong> {{total}}</span></p>
+                                    <p>Shipping Cost <span class="text-primary">$00.00</span></p>
+                                    <p>Enter Discount code here</p>
+
+
+                                    <p><input type="text" name="coupon" id="coupon_code"> <span
+                                            class="text-primary">
+                                            <input
+                                                    type="submit" value="Apply" id="apply_coupon"></span></p>
+
+                                    <h2>Grand Total <span class="text-primary"><strong>Rs.</strong> <span id="final_total">{{total}}</span></span></h2>
+                                </div>
+                                <div class="cart-summary-button">
+
+                                    <a href="{% url 'user-cart-payment' %}" class="checkout-btn c-btn btn--primary">Checkout</a>
+                                    <button class="update-btn c-btn btn-outlined" onClick="window.location.reload();">Update Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+<section class="section-margin">
+    <div class="container">
+        <div class="section-title section-title--bordered">
+            <h2>RECOMMENDED FOR YOU</h2>
+        </div>
+        <div class="product-slider sb-slick-slider slider-border-single-row" data-slick-setting='{
+                "autoplay": true,
+                "autoplaySpeed": 8000,
+                "slidesToShow": 6,
+                "dots":true
+            }' data-slick-responsive='[
+                {"breakpoint":1200, "settings": {"slidesToShow": 5} },
+                {"breakpoint":992, "settings": {"slidesToShow": 4} },
+                {"breakpoint":768, "settings": {"slidesToShow": 3} },
+                {"breakpoint":480, "settings": {"slidesToShow": 2} },
+                {"breakpoint":320, "settings": {"slidesToShow": 1} }
+            ]'>
+            {% for book in recommandations %}
+            <div class="single-slide">
+                <div class="product-card">
+
+                    <div class="product-card--body">
+                        <div class="card-image">
+                            <img style="height:200px" src="{{book.cover_photo.url}}" alt="">
+                        </div>
+                        <div class="price-block">
+                            <div class="product-header">
+                                <h6><strong><a
+                                        href="{% url 'user-product-detail' book.book_id %}">{{book.title}}</a></strong>
+                                </h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-6"><span class="price">{{book.price}} PKR</span></div>
+                                <div class="col-6"><span class="pub_year">{{book.year_of_publish}}</span></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<script>
+  $(document).ready(function(){
+    var voucher = '';
+
+    $('#apply_coupon').click(function(){
+       console.log($('#coupon_code').val());
+        var obj = new Object();
+        obj.code = $('#coupon_code').val();
+        obj.csrfmiddlewaretoken = "{{csrf_token}}";
+        var jsonString= JSON.stringify(obj);
+        $.ajax({
+            url: "{% url 'user_check_voucher' %}",
+            type: 'get',
+            data: {'data' : jsonString},
+            success: function(data) {
+
+                if(data['voucher'] != 'None'){
+                    voucher = data
+                    console.log(voucher['voucher'])
+                    pre=parseFloat($('#final_total').text())
+                    console.log(voucher['voucher']['credit'])
+                    post = pre - voucher['voucher']['credit']
+                    console.log(post)
+                    $('#final_total').text(parseFloat(post))
+                }else{
+                    alert('Invalid Code')
+                }
+
+            },
+            failure: function(data) {}
+        });
+    });
+  });
+
+
+    function add_to_wishlist(book_id){
+        $.ajax({
+            url:"set_wishlist/"+parseInt(book_id),
+            type: 'get',
+            success: function(data){
+                alert('Added to Wishlist')
+            },
+            failure(data){
+
+            }
+        });
+    }
+
+    function remove_to_wishlist(book_id){
+        $.ajax({
+            url:"remove_wishlist/"+parseInt(book_id),
+            type: 'get',
+            success: function(data){
+                alert('Removed from Wishlist')
+
+            },
+            failure(data){
+
+            }
+        });
+    }
+
+
+function remove_cart(book_id){
+    $.ajax({
+        url:"remove_cart/"+parseInt(book_id),
+        type: 'get',
+        success: function(data){
+        },
+        failure(data){
+        }
+    });
+
+}
+
+</script>
+
+{% endblock content %}

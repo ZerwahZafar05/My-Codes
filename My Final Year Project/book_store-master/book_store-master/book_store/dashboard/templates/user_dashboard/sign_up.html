@@ -1,0 +1,82 @@
+{% extends 'user_dashboard/base.html' %}
+
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block navbar_address %}
+<li class="breadcrumb-item active">Sign Up</li>
+{% endblock navbar_address %}
+
+{% block content %}
+<main class="page-section inner-page-sec-padding-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2 col-md-3 col-xs-2 col-lg-3 mb--30 mb-lg--0"></div>
+            <div class="col-sm-8 col-md-6 col-xs-8 col-lg-6 mb--30 mb-lg--0">
+                <!-- Login Form s-->
+            <form id="form" action="{% url 'user-signup' %}" method="post">
+                {% csrf_token %}
+                <div class="login-form">
+                        <h4 class="login-title login-headings">Sign Up</h4>
+                        <p class="login-headings">Create your account or <a href="{% url 'user-login' %}" style="font-weight: bold;">sign in</a> if
+                            you already have an account.</p>
+                        <div class="row">
+                            <div class="col-md-12 col-12 mb--15">
+                                <label style="font-weight: bold;">Username</label>
+                                    {% render_field form.username|add_class:'mb-0 form-control' type="text" placeholder="Username" %}
+                            </div>
+                            <div class="col-md-12 col-12 mb--15">
+                                <label style="font-weight: bold;">First Name</label>
+                                    {% render_field form.first_name|add_class:'mb-0 form-control' type="text" placeholder="First Name" %}
+
+                            </div>
+                            <div class="col-md-12 col-12 mb--15">
+                                <label style="font-weight: bold;">Last Name</label>
+                                    {% render_field form.last_name|add_class:'mb-0 form-control' type="text" placeholder="Last Name" %}
+
+                            </div>
+                            <div class="col-12 mb--20">
+                                <label style="font-weight: bold;">Email</label>
+                                {% render_field form.email|add_class:'mb-0 form-control' type="email" placeholder="Enter tour Email Address Here" %}
+
+                            </div>
+                            <div class="col-12 mb--20">
+                                <label style="font-weight: bold;">Date of Birth</label>
+                                    {% render_field form.date_of_birth|add_class:'mb-0 form-control' type='date' placeholder="Date of Birth" %}
+
+                            </div>
+
+
+                            <div class="col-lg-6 mb--20">
+                                <label style="font-weight: bold;">Password</label>
+                                    {% render_field form.password|add_class:'mb-0 form-control' type="password" placeholder="Enter your password" %}
+
+
+                            </div>
+
+                            <div class="col-lg-6 mb--20">
+                                <label  style="font-weight: bold;">Repeat Password</label>
+                                    {% render_field form.password2|add_class:'mb-0 form-control' type="password" placeholder="Repeat your password" %}
+                            </div >
+                            {% if messages %}
+                                <div class="col-lg-12 mb--20 outlined" style="background: rgba(255, 0, 0, 0.4)">
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                        <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+                            {% endif %}
+                            <div class="col-md-12">
+                                <button id="submit" style="background:#ee964b;color:white" type="submit" class="btn btn-outlined"> Register</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>{% endblock %}

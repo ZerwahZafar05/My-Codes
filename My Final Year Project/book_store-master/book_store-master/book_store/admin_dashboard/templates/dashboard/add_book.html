@@ -1,0 +1,263 @@
+{% extends 'dashboard/base.html' %}
+{% load widget_tweaks %}
+
+{% block dashboard_title %}
+Adding Book
+{% endblock %}
+
+
+<!-- navbar address -->
+{% block navbar_address %}
+<li class="breadcrumb-item active">Add Book</li>
+{% endblock %}
+
+<!-- Main Content -->
+{% block content %}
+<!-- form start -->
+<div class="content">
+    <div class="container-fluid">
+
+        <form enctype="multipart/form-data" method="post" action="/admin_dashboard/add_book">
+            {% csrf_token %}
+            <input type="hidden" name="csrfmiddlewaretoken"
+                   value="xsswrQ4bTS2QMNjFGNkvhQTST63Ikd1WqxOLKmniaC8ZKMKmrBfoLHR2h4AbhDZ8">
+            <div>
+                <div class="row">
+                    <div class="form-group" style="width:50%">
+                        <label>Book Title</label>
+
+                        <input type="text" name="title" required maxlength="100" class="form-control input input__text"
+                               placeholder="Book Title" id="id_title">
+                    </div>
+                    <div class="form-group" style="width:50%">
+                        <label>Year of Publish</label>
+                        <input type="number" min="1500" max="2099" step="1" name="year_of_publish" required
+                               class="form-control input" placeholder="Year of publish"
+                               id="id_year_of_publish">
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group" style="width:50%">
+                        <label>Number of pages</label>
+                        <input type="number" name="no_of_pages" required class="form-control input"
+                               placeholder="Number of pages"
+                               id="id_no_of_pages">
+                    </div>
+
+                    <div class="form-group" style="width:50%">
+                        <label>Genre of the Book</label>
+                        <select name="genre" class="form-control input" multiple required id="id_genre">
+                            <option value="Action">Action</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Art_Architecture">Art/Architecture</option>
+                            <option value="Autobiography">Autobiography</option>
+                            <option value="Anthology">Anthology</option>
+                            <option value="Biography">Biography</option>
+                            <option value="Business">Business</option>
+                            <option value="Children">Children</option>
+                            <option value="Classic">Classic</option>
+                            <option value="ComicBook">Comic Book</option>
+                            <option value="Crime">Crime</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Fairy_Tail">FairyTail</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Health_Fitness">Health/Fitness</option>
+                            <option value="History">History</option>
+                            <option value="Historical_Fiction">Historical Fiction</option>
+                            <option value="Humor">Humor</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Paranormal_romance">Paranormal romance</option>
+                            <option value="Philosophy">Philosophy</option>
+                            <option value="Poetry">Poetry</option>
+                            <option value="Political_thriller">Political thriller</option>
+
+                            <option value="Religion_spirituality">Religion/spirituality</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Science_fiction">Science fiction</option>
+                            <option value="Suspense">Suspense</option>
+                            <option value="Self_help">Self help</option>
+                            <option value="Sports_and_leisure">Sports and leisure</option>
+                            <option value="Thriller">Thriller</option>
+
+                            <option value="Travel">Travel</option>
+                            <option value="True_Crime">True Crime</option>
+                            <option value="Western">Western</option>
+                            <option value="Young_Adult">Young Adult</option>
+
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group" style="width:50%">
+                        <label>Price of the Book</label>
+                        <input type="number" name="price" required step="any" class="form-control input"
+                               placeholder="Price of the book" id="id_price">
+
+                    </div>
+
+
+                    <div class="form-group" style="width:50%">
+                        <label>Author of the book</label>
+                        <input type="text" name="author" required maxlength="100" class="form-control input"
+                               placeholder="Author of the book" id="id_author">
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group" style="width: 20%">
+                        <label style="margin-right:2%">Adult Mode?</label>
+                        <input type="checkbox" name="adult_mode" placeholder="Adult Mode" class="input"
+                               id="id_adult_mode">
+                    </div>
+
+
+                    <div class="form-group" style="width: 20%">
+                        <label style="margin-right:2%">Best Seller?</label>
+                        <input type="checkbox" name="best_seller" placeholder="Best Seller" class="input"
+                               id="id_best_seller">
+                    </div>
+
+
+                    <div class="form-group" style="width: 20%">
+                        <label style="margin-right:2%">Free?</label>
+                        <input type="checkbox" name="free_book" placeholder="Free Book" class="input" id="id_free_book">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="margin-right:2%">Summary</label>
+                    <textarea name="summary" cols="40" rows="10" required maxlength="500" placeholder="Cover Photo"
+                              class="input col-12" required="" id="id_summary">Not Available</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Cover Photo</label>
+                    <input type="file" name="cover_photo" required accept="image/*" placeholder="Cover Photo"
+                           class="file"
+                           id="id_cover_photo">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Book Type</label>
+                    <select name="book_type" class="form-control input" required id="id_book_type">
+                        <option value="BOTH">BOTH AUDIO AND PDF</option>
+
+                        <option value="PDF">PDF</option>
+
+                    </select>
+                </div>
+                <div class="form-group form-pdf">
+                    <label>PDF</label>
+                    <input type="file" name="pdf" placeholder="file" required class="input" id="id_pdf">
+                </div>
+
+                <div class="form-group form-audio">
+                    <label>Audio</label>
+                    <div id="audio">
+                    </div>
+                    <input style="background:#ee964b; border-color:#ee964b; color:white" type="button" name="add_audio"
+                           id="add_audio" value="Add Audio">
+
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" style="background: #ee964b; border-color:#ee964b" class="btn btn-primary">Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+$(document).ready(function(){
+    $('#id_book_type').change(function(){
+        if ($(this).val() == 'PDF'){
+            $('.form-audio').hide();
+            $('.form-pdf').show();
+
+            $("#id_pdf").prop('required',true);
+            $("#id_audio").prop('required',false);
+        }
+        if ($(this).val() == 'AUDIO'){
+            $('.form-pdf').hide();
+            $('.form-audio').show();
+
+            $("#id_pdf").prop('required',false);
+            $("#id_audio").prop('required',true);
+        }
+        if ($(this).val() == 'BOTH'){
+            $('.form-pdf').show();
+            $('.form-audio').show();
+
+            $("#id_audio").prop('required',true);
+            $("#id_pdf").prop('required',true);
+        }
+    });
+
+
+    document.getElementById("add_audio").onclick=function (ev) {
+
+        var image=document.getElementById("audio");
+
+
+
+        var newInput=document.createElement("input");
+        newInput.type="file";
+        newInput.name="file[]";
+
+
+        var br=document.createElement("br");
+        var br1=document.createElement("br");
+
+        newInput.onchange=function (ev1) {
+            if(this.files && this.files[0]){
+                var fileReader=new FileReader();
+
+
+                fileReader.readAsDataURL(this.files[0])
+            }
+        };
+
+        image.appendChild(newInput);
+        image.appendChild(br);
+        image.appendChild(br1);
+
+    }
+
+    checkbox = document.getElementById('id_free_book');
+    checkbox.addEventListener('change', e => {
+
+    if(e.target.checked){
+        $('#id_price').prop("readonly", true);
+        $('#id_price').val(00);
+    }else{
+        $('#id_price').prop("readonly", false);
+
+    }
+
+});
+
+
+});
+
+
+
+
+
+
+
+</script>
+
+{% endblock %}
+
+

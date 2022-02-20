@@ -1,0 +1,690 @@
+{% extends 'user_dashboard/base.html' %}
+{% load static %}
+{% block navbar_address %}
+{% endblock navbar_address %}
+{% block content %}
+<style>
+    .wrapper {
+  margin: 10vh;
+}
+.breadcrumb-section{
+    display: none;
+}
+.card {
+  border: none;
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+  overflow: hidden;
+  border-radius: 20px;
+  min-height: 450px;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 768px) {
+  .card {
+    min-height: 350px;
+  }
+}
+@media (max-width: 420px) {
+  .card {
+    min-height: 300px;
+  }
+}
+
+.card.card-has-bg {
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+  background-size: 120%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.card.card-has-bg:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: inherit;
+  -webkit-filter: grayscale(1);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+.card.card-has-bg:hover {
+  transform: scale(0.98);
+  box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.3);
+  background-size: 130%;
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.card.card-has-bg:hover .card-img-overlay {
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  background: #234f6d;
+  background: linear-gradient(0deg, rgba(4, 69, 114, 0.5) 0%, #044572 100%);
+}
+.card .card-footer {
+  background: none;
+  border-top: none;
+}
+.card .card-footer .media img {
+  border: solid 3px rgba(234, 95, 0, 0.3);
+}
+.card .card-meta {
+  color: orange;
+}
+.card .card-body {
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.card:hover {
+  cursor: pointer;
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.card:hover .card-body {
+  margin-top: 30px;
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.card .card-img-overlay {
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  background: #234f6d;
+  background: linear-gradient(0deg, rgba(35, 79, 109, 0.3785889356) 0%, #455f71 100%);
+}
+
+.red-icon{
+    color: red;
+}
+
+
+
+</style>
+
+<section class="hero-area hero-slider-3">
+    <div class="sb-slick-slider" data-slick-setting='{
+                                                        "autoplay": true,
+                                                        "autoplaySpeed": 8000,
+                                                        "slidesToShow": 1,
+                                                        "dots":true
+                                                        }'>
+        <div class="single-slide bg-image  bg-overlay--dark"
+             data-bg="{% static 'user_dashboard/image/bg-images/Slider1.jpg' %} ">
+            <div class="container" style="margin-left: 30px;">
+                <div class="home-content pl-3-0">
+                    <div class="row" style="margin-top: auto;margin-bottom: 50px;">
+                        <div class="col-lg-6" style="background: rgba(169,169,169,0.7);padding: 33px;">
+                            <h1 class="slider_caption">Falling</h1>
+                            <h2>Cover up front of book and
+                                <br>leave summary</h2>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single-slide bg-image  bg-overlay--dark"
+             data-bg="{% static 'user_dashboard/image/bg-images/Slider2.jpg' %}">
+            <div class="container" style="margin-left: 30px;">
+                <div class="home-content pl--30">
+                    <div class="row" style="margin-top: auto;margin-bottom: 50px;">
+                        <div class="col-lg-6" style="background: rgba(128,128,128,0.7);padding: 33px;">
+                            <h1>I Love This Idea!</h1>
+                            <h2>Cover up front of book and
+                                <br>leave summary</h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single-slide bg-image  bg-overlay--dark"
+             data-bg="{% static 'user_dashboard/image/bg-images/Slider3.jpg' %}">
+            <div class="container" style="margin-left: 30px;">
+                <div class="home-content pl--30">
+                    <div class="row" style="margin-top: auto;margin-bottom: 50px;">
+                        <div class="col-lg-6" style="background: rgba(	13, 152, 186,0.7);padding: 33px;">
+                            <h1>I Love This Idea!</h1>
+                            <h2>Cover up front of book and
+                                <br>leave summary</h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="single-slide bg-image  bg-overlay--dark"
+             data-bg="{% static 'user_dashboard/image/bg-images/Slider4.jpg' %}">
+            <div class="container" style="margin-left: 30px;">
+                <div class="home-content pl--30">
+                    <div class="row" style="margin-top: auto;margin-bottom: 50px;">
+                        <div class="col-lg-6" style="background: rgba(196, 211, 223,0.7);padding: 33px;">
+                            <h1>I Love This Idea!</h1>
+                            <h2>Cover up front of book and
+                                <br>leave summary</h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single-slide bg-image  bg-overlay--dark"
+             data-bg="{% static 'user_dashboard/image/bg-images/Slider5.jpg' %}">
+            <div class="container" style="margin-left: 30px;">
+                <div class="home-content pl--30">
+                    <div class="row" style="margin-top: auto;margin-bottom: 50px;">
+                        <div class="col-lg-6" style="background: rgba(255,99,71,0.7);padding: 33px;">
+                            <h1>I Love This Idea!</h1>
+                            <h2>Cover up front of book and
+                                <br>leave summary</h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--Top Book list-->
+<section class="section-margin">
+    <div class="section-title section-title--bordered">
+        <h2>Latest</h2>
+    </div>
+    <div class="product-slider sb-slick-slider slider-border-single-row" data-slick-setting='{
+                        "autoplay": true,
+                        "autoplaySpeed": 8000,
+                        "slidesToShow": 8,
+                        "dots":true
+                    }' data-slick-responsive='[
+                        {"breakpoint":1200, "settings": {"slidesToShow": 6} },
+                        {"breakpoint":992, "settings": {"slidesToShow": 5} },
+                        {"breakpoint":768, "settings": {"slidesToShow": 4} },
+                        {"breakpoint":480, "settings": {"slidesToShow": 2} },
+                        {"breakpoint":320, "settings": {"slidesToShow": 1} }
+                    ]'>
+
+        {% for book in books %}
+        <div class="single-slide">
+            <div class="product-card">
+
+                <div class="product-card--body">
+                    <div class="card-image">
+                        <img src="{{ book.cover_photo.url }}"
+                             style="height:250px; width: -webkit-fill-available;" alt="NOt Available">
+                        <div class="hover-contents">
+                            <p>{{ book.title }}</p>
+
+                            <p style="font-size: small;">
+                                {{book.summary}}
+                            </p>
+
+                            <p style="font-size: small;"><strong>Author: </strong>{{book.author}}</p>
+                            <p style="font-size: small;"><strong>Genre: </strong>{{book.genre}}</p>
+
+
+                            <div class="hover-btns">
+                                {% if not book.is_buy %}
+                                <a onclick="add_to_cart({{book.book_id}})" class="single-btn"
+                                   id="cart-{{book.book_id}}">
+                                    <i class="fas fa-shopping-basket"></i>
+                                </a>
+                                {% endif %}
+
+                                {% if book.book_wishlist %}
+                                <a onclick="remove_to_wishlist({{book.book_id}})" id="wishlist-{{book.book_id}}"
+                                   class="single-btn ">
+                                    <i class="fas fa-heart red-icon" title="Remove from Wishlist"></i>
+                                </a>
+                                {% else %}
+                                <a onclick="add_to_wishlist({{book.book_id}})" id="wishlist-{{book.book_id}}"
+                                   class="single-btn ">
+                                    <i class="fas fa-heart" title="Add to Wishlist"></i>
+                                </a>
+                                {% endif %}
+
+                                <a href="{% url 'user-product-detail' book.book_id %}"
+                                   class="single-btn">
+                                    Read Now
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="price-block">
+                        <div class="product-header">
+                            <p>
+                                <strong>
+                                    <a href="{% url 'user-product-detail' book.book_id %}">{{book.title}}</a>
+                                </strong>
+                            </p>
+                            <div style="margin-top:-12px; font-size:14px">{{book.price}} PKR</div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<section class="section-margin">
+    <div class="section-title section-title--bordered">
+        <h2>Best Sellers</h2>
+    </div>
+    <div class="product-slider sb-slick-slider slider-border-single-row" data-slick-setting='{
+                "autoplay": true,
+                "autoplaySpeed": 8000,
+                "slidesToShow": 8,
+                "dots":true
+            }' data-slick-responsive='[
+                {"breakpoint":1200, "settings": {"slidesToShow": 6} },
+                {"breakpoint":992, "settings": {"slidesToShow": 5} },
+                {"breakpoint":768, "settings": {"slidesToShow": 4} },
+                {"breakpoint":480, "settings": {"slidesToShow": 2} },
+                {"breakpoint":320, "settings": {"slidesToShow": 1} }
+            ]'>
+        {% for book in best_seller %}
+        <div class="single-slide">
+            <div class="product-card">
+
+                <div class="product-card--body">
+                    <div class="card-image">
+                        <img src="{{ book.cover_photo.url }}"
+                             style="height:250px; width: -webkit-fill-available;" alt="NOt Available">
+                        <div class="hover-contents">
+                            <p>{{ book.title }}</p>
+
+                            <p style="font-size: small;">
+                                {{book.summary}}
+                            </p>
+
+                            <p style="font-size: small;"><strong>Author: </strong>{{book.author}}</p>
+                            <p style="font-size: small;"><strong>Genre: </strong>{{book.genre}}</p>
+
+
+                            <div class="hover-btns">
+                                {% if not book.is_buy %}
+                                <a onclick="add_to_cart({{book.book_id}})" class="single-btn">
+                                    <i class="fas fa-shopping-basket"></i>
+                                </a>
+                                {% endif %}
+
+                                {% if book.book_wishlist %}
+                                <a onclick="remove_to_wishlist({{book.book_id}})" id="wishlist-{{book.book_id}}"
+                                   class="single-btn ">
+                                    <i class="fas fa-heart red-icon" title="Remove from Wishlist"></i>
+                                </a>
+                                {% else %}
+                                <a onclick="add_to_wishlist({{book.book_id}})" id="wishlist-{{book.book_id}}"
+                                   class="single-btn ">
+                                    <i class="fas fa-heart" title="Add to Wishlist"></i>
+                                </a>
+                                {% endif %}
+
+                                <a href="{% url 'user-product-detail' book.book_id %}"
+                                   class="single-btn">
+                                    Read Now
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="price-block">
+                        <div class="product-header">
+                            <p><strong><a
+                                    href="{% url 'user-product-detail' book.book_id %}">{{book.title}}</a></strong></p>
+                            <div style="margin-top:-12px; font-size:14px">{{book.price}} PKR</div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section-margin">
+    <div class="section-title section-title--bordered">
+        <h2>Wishlist</h2>
+    </div>
+    <div class="product-slider sb-slick-slider slider-border-single-row" data-slick-setting='{
+                        "autoplay": true,
+                        "autoplaySpeed": 8000,
+                        "slidesToShow": 8,
+                        "dots":true
+                    }' data-slick-responsive='[
+                        {"breakpoint":1200, "settings": {"slidesToShow": 6} },
+                        {"breakpoint":992, "settings": {"slidesToShow": 5} },
+                        {"breakpoint":768, "settings": {"slidesToShow": 4} },
+                        {"breakpoint":480, "settings": {"slidesToShow": 2} },
+                        {"breakpoint":320, "settings": {"slidesToShow": 1} }
+                    ]'>
+
+        {% for book in books %}
+        {% if book.book_wishlist %}
+        <div class="single-slide">
+            <div class="product-card">
+
+                <div class="product-card--body">
+                    <div class="card-image">
+                        <img src="{{ book.cover_photo.url }}"
+                             style="height:250px; width: -webkit-fill-available;" alt="NOt Available">
+                        <div class="hover-contents">
+                            <p>{{ book.title }}</p>
+
+                            <p style="font-size: small;">
+                                {{book.summary}}
+                            </p>
+
+                            <p style="font-size: small;"><strong>Author: </strong>{{book.author}}</p>
+                            <p style="font-size: small;"><strong>Genre: </strong>{{book.genre}}</p>
+
+
+                            <div class="hover-btns">
+                                {% if not book.is_buy %}
+                                <a onclick="add_to_cart({{book.book_id}})" class="single-btn"
+                                   id="cart-{{book.book_id}}">
+                                    <i class="fas fa-shopping-basket"></i>
+                                </a>
+                                {% endif %}
+
+                                {% if book.book_wishlist %}
+                                <a onclick="remove_to_wishlist({{book.book_id}})" id="wishlist-{{book.book_id}}"
+                                   class="single-btn ">
+                                    <i class="fas fa-heart red-icon" title="Remove from Wishlist"></i>
+                                </a>
+                                {% else %}
+                                <a onclick="add_to_wishlist({{book.book_id}})" id="wishlist-{{book.book_id}}"
+                                   class="single-btn ">
+                                    <i class="fas fa-heart" title="Add to Wishlist"></i>
+                                </a>
+                                {% endif %}
+
+                                <a href="{% url 'user-product-detail' book.book_id %}"
+                                   class="single-btn">
+                                    Read Now
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="price-block">
+                        <div class="product-header">
+                            <p>
+                                <strong>
+                                    <a href="{% url 'user-product-detail' book.book_id %}">{{book.title}}</a>
+                                </strong>
+                            </p>
+                            <div style="margin-top:-12px; font-size:14px">{{book.price}} PKR</div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% for book in best_seller %}
+                <div class="single-slide">
+            <div class="product-card">
+
+                <div class="product-card--body">
+                    <div class="card-image">
+                        <img src="{{ book.cover_photo.url }}"
+                             style="height:250px; width: -webkit-fill-available;" alt="NOt Available">
+                        <div class="hover-contents">
+                            <p>{{ book.title }}</p>
+
+                            <p style="font-size: small;">
+                                {{book.summary}}
+                            </p>
+
+                            <p style="font-size: small;"><strong>Author: </strong>{{book.author}}</p>
+                            <p style="font-size: small;"><strong>Genre: </strong>{{book.genre}}</p>
+
+
+                            <div class="hover-btns">
+                                {% if not book.is_buy %}
+                                <a onclick="add_to_cart({{book.book_id}})" class="single-btn"
+                                   id="cart-{{book.book_id}}">
+                                    <i class="fas fa-shopping-basket"></i>
+                                </a>
+                                {% endif %}
+
+                                {% if book.book_wishlist %}
+                                <a onclick="remove_to_wishlist({{book.book_id}})" id="wishlist-{{book.book_id}}"
+                                   class="single-btn ">
+                                    <i class="fas fa-heart red-icon" title="Remove from Wishlist"></i>
+                                </a>
+                                {% else %}
+                                <a onclick="add_to_wishlist({{book.book_id}})" id="wishlist-{{book.book_id}}"
+                                   class="single-btn ">
+                                    <i class="fas fa-heart" title="Add to Wishlist"></i>
+                                </a>
+                                {% endif %}
+
+                                <a href="{% url 'user-product-detail' book.book_id %}"
+                                   class="single-btn">
+                                    Read Now
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="price-block">
+                        <div class="product-header">
+                            <p>
+                                <strong>
+                                    <a href="{% url 'user-product-detail' book.book_id %}">{{book.title}}</a>
+                                </strong>
+                            </p>
+                            <div style="margin-top:-12px; font-size:14px">{{book.price}} PKR</div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</section>
+<section class="section-margin" id="adult-section">
+    <div class="section-title section-title--bordered">
+        <h2>Adult</h2>
+    </div>
+    <div class="product-slider sb-slick-slider slider-border-single-row" data-slick-setting='{
+                "autoplay": true,
+                "autoplaySpeed": 8000,
+                "slidesToShow": 8,
+                "dots":true
+            }' data-slick-responsive='[
+                {"breakpoint":1200, "settings": {"slidesToShow": 6} },
+                {"breakpoint":992, "settings": {"slidesToShow": 5} },
+                {"breakpoint":768, "settings": {"slidesToShow": 4} },
+                {"breakpoint":480, "settings": {"slidesToShow": 2} },
+                {"breakpoint":320, "settings": {"slidesToShow": 1} }
+            ]'>
+        {% for book in adults %}
+        <div class="single-slide">
+            <div class="product-card">
+
+                <div class="product-card--body">
+                    <div class="card-image">
+                        <img src="{{ book.cover_photo.url }}"
+                             style="height:250px; width: -webkit-fill-available;" alt="NOt Available">
+                        <div class="hover-contents">
+                            <p>{{ book.title }}</p>
+                            <div class="row" style="font-size: small;">
+                                <div class="col-4"><span class="price">{{book.price}}</span></div>
+                                <div class="col-4"><span class="pub_year">{{book.year_of_publish}}</span></div>
+                                <div class="col-4"><span class="price">{{book.no_of_pages}}</span></div>
+
+                            </div>
+                            <p style="font-size: small;">
+                                {{book.summary}}
+                            </p>
+
+                            <p style="font-size: small;"><strong>Author: </strong>{{book.author}}</p>
+                            <p style="font-size: small;"><strong>Genre: </strong>{{book.genre}}</p>
+
+
+                            <div class="hover-btns">
+                                {% if not book.is_buy %}
+                                <a onclick="add_to_cart({{book.book_id}})" class="single-btn">
+                                    <i class="fas fa-shopping-basket"></i>
+                                </a>
+                                {% endif %}
+
+                                {% if book.book_wishlist %}
+                                <a onclick="remove_to_wishlist({{book.book_id}})" id="wishlist-{{book.book_id}}"
+                                   class="single-btn ">
+                                    <i class="fas fa-heart red-icon" title="Remove from Wishlist"></i>
+                                </a>
+                                {% else %}
+                                <a onclick="add_to_wishlist({{book.book_id}})" id="wishlist-{{book.book_id}}"
+                                   class="single-btn ">
+                                    <i class="fas fa-heart" title="Add to Wishlist"></i>
+                                </a>
+                                {% endif %}
+
+                                <a href="{% url 'user-product-detail' book.book_id %}"
+                                   class="single-btn">
+                                    Read Now
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="price-block">
+                        <div class="product-header">
+                            <p><strong><a
+                                    href="{% url 'user-product-detail' book.book_id %}">{{book.title}}</a></strong></p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+<script>
+
+    var cart = []
+
+    function add_to_wishlist(book_id){
+        $.ajax({
+            url:"set_wishlist/"+parseInt(book_id),
+            type: 'get',
+            success: function(data){
+                alert('Added to Wishlist')
+                $('#wishlist-'+book_id).addClass('red-icon')
+            },
+            failure(data){
+
+            }
+        });
+    }
+
+    function remove_to_wishlist(book_id){
+        $.ajax({
+            url:"remove_wishlist/"+parseInt(book_id),
+            type: 'get',
+            success: function(data){
+                alert('Removed from Wishlist')
+                    $('#wishlist-'+book_id).removeClass('red-icon')
+
+            },
+            failure(data){
+
+            }
+        });
+    }
+function add_to_cart(book_id){
+    if($('#cart-'+book_id ).hasClass('red-icon')){
+        console.log(true)
+
+        const index = cart.indexOf(book_id);
+        if (index > -1) {
+            cart.splice(index, 1);
+        }
+
+        $('#cart-'+book_id ).removeClass('red-icon');
+
+    }else{
+    console.log(false)
+        $('#cart-'+book_id ).addClass('red-icon');
+        cart.push(book_id);
+        alert('Added to Cart!')
+    }
+}
+function cart_click(){
+    if(cart.length == 0){
+        alert('Empty Cart')
+    }
+    else{
+        console.log(cart)
+         $.ajax({
+            url:"set_cart",
+            type: 'GET',
+            data: {
+                "cart": JSON.stringify(cart)
+                },
+            success: function(data){
+                window.location = "{% url 'user-cart' %}"
+            },
+            failure(data){
+
+            }
+        });
+    }
+
+}
+setTimeout(function(){ $('#adult-section').css("content-visibility","hidden"); }, 1000);
+function click_child(){
+    $('#adult-section').css("content-visibility","hidden");
+}
+
+function click_adult(email){
+    if({{age}} > 18){
+    var emailTmp = window.prompt("Enter your Password!", "");
+
+         $.ajax({
+            url:"adult_password_check",
+            type: 'GET',
+            data: {
+                "password": emailTmp
+                },
+            success: function(data){
+                if(data=='pass'){
+                    $('#adult-section').css("content-visibility","visible");
+                }
+                else{
+                    window.alert('Wrong password!!');
+
+                $('#adult-section').css("content-visibility","hidden");
+                }
+            },
+            failure(data){
+
+            }
+        });
+    }
+}
+
+
+
+</script>
+{% endblock content %}
+
+
